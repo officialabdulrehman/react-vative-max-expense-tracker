@@ -17,7 +17,7 @@ const initialState: State = {
   })
 }
 
-const themeSlice = createSlice({
+export const themeSlice = createSlice({
   name: "theme",
   initialState,
   reducers: {
