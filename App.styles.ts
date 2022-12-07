@@ -1,10 +1,10 @@
-import { StyleSheet } from "react-native";
+import { DynamicStyleSheet } from "./src/styles/Dynamic.StyleSheet";
 
-export const styles = StyleSheet.create({
+export const styles = DynamicStyleSheet.create((props) => ({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: props.backgroundColors.primary000,
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+}));

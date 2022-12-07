@@ -1,7 +1,9 @@
 import { ThemeI } from "../themeI"
+import { Themes } from "../Themes.enum"
 
 export const DarkTheme = (): ThemeI => {
   return {
+    name: Themes.DARK,
     colors: {
       primary000: "",
       primary100: "",

@@ -1,3 +1,5 @@
+import { Themes } from "./Themes.enum"
+
 export interface palette {
   primary000: string
   primary100: string
@@ -26,6 +28,7 @@ export interface BackgroundColorsI extends palette { }
 export interface TextColorsI extends palette { }
 
 export interface ThemeI {
+  name: Themes
   colors: ColorsI
   backgroundColors: BackgroundColorsI
   textColors: TextColorsI

@@ -1,9 +1,11 @@
 import { ThemeI } from "../themeI"
+import { Themes } from "../Themes.enum"
 
 export const LightTheme = (): ThemeI => {
   return {
+    name: Themes.LIGHT,
     colors: {
-      primary000: "",
+      primary000: "rgba(79, 195, 247, 1)",
       primary100: "",
       primary200: "",
       primary300: "",
@@ -25,10 +27,10 @@ export const LightTheme = (): ThemeI => {
       secondary900: "",
     },
     backgroundColors: {
-      primary000: "",
-      primary100: "",
-      primary200: "",
-      primary300: "",
+      primary000: "#fff",
+      primary100: "f3f3f3",
+      primary200: "eee",
+      primary300: "e3e3e3",
       primary400: "",
       primary500: "",
       primary600: "",

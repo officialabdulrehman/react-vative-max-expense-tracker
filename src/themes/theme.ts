@@ -7,7 +7,7 @@ type Props = {
   theme: Themes
 }
 
-export const theme = ({ theme }: Props): ThemeI => {
+export const getTheme = ({ theme }: Props): ThemeI => {
   switch (theme) {
     case Themes.LIGHT: {
       return LightTheme()
