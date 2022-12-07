@@ -12,7 +12,7 @@ const BottomTabs = createBottomTabNavigator();
 
 const NavigationBottomTabs = () => {
   return (
-    <BottomTabs.Navigator>
+    <BottomTabs.Navigator screenOptions={{}}>
       <BottomTabs.Screen
         name={Screens.ExpensesRecent}
         component={ExpensesRecent}
@@ -30,6 +30,9 @@ export default function App() {
           <Stack.Screen
             name={Screens.ExpenseManage}
             component={ExpenseManage}
+            options={{
+              headerShown: false,
+            }}
           />
           <Stack.Screen
             name={Screens.NavigationBottomTabs}
