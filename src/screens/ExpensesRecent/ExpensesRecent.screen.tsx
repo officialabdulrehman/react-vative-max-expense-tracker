@@ -1,11 +1,7 @@
-import { Text, View } from "react-native";
+import { ExpensesOutput } from "../../components/ExpensesOutput/ExpensesOutput";
 
 type Props = {};
 
 export const ExpensesRecent = (props: Props) => {
-  return (
-    <View>
-      <Text>ExpensesRecent Screen</Text>
-    </View>
-  );
+  return <ExpensesOutput expenses={""} period="Last 7 Days" />;
 };

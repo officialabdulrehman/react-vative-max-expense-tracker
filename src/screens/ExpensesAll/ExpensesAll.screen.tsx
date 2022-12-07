@@ -1,11 +1,7 @@
-import { Text, View } from "react-native";
+import { ExpensesOutput } from "../../components/ExpensesOutput/ExpensesOutput";
 
 type Props = {};
 
 export const ExpensesAll = (props: Props) => {
-  return (
-    <View>
-      <Text>ExpensesAll Screen</Text>
-    </View>
-  );
+  return <ExpensesOutput expenses={""} period="All Time" />;
 };

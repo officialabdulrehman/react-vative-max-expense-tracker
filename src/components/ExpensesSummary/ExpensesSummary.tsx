@@ -1,12 +1,20 @@
 import { Text, View } from "react-native";
+import { styles } from "./ExpensesSummary.styles.";
 
-type Props = {};
+type Props = {
+  expenses: { amount: number }[];
+  period: string;
+};
 
 export const ExpensesSummary = (props: Props) => {
+  const { expenses, period } = props;
+  const sum = expenses.reduce((sum: number, expense) => {
+    return sum + expense.amount;
+  }, 0);
   return (
-    <View>
-      <Text>Last 3 Days</Text>
-      <Text>$132.00USD</Text>
+    <View style={styles.container}>
+      <Text>{period}</Text>
+      <Text>${sum.toFixed(2)}USD</Text>
     </View>
   );
 };
