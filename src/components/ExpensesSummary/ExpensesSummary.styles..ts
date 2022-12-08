@@ -7,7 +7,13 @@ export const styles = DynamicStyleSheet.create((props) => ({
     borderRadius: 8,
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
+    marginBottom: 10,
+    elevation: 3,
+    shadowColor: props.backgroundColors.primary400,
+    shadowRadius: 4,
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 1,
   },
   period: {
     fontSize: 14,
@@ -16,6 +22,6 @@ export const styles = DynamicStyleSheet.create((props) => ({
   sum: {
     fontSize: 18,
     fontWeight: "bold",
-    color: props.colors.primary600
+    color: props.colors.secondary400
   }
 }))

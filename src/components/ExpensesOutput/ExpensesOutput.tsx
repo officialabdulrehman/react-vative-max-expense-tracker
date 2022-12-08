@@ -39,6 +39,36 @@ const DUMMY_EXPENSES = [
     amount: 18.99,
     date: new Date("2022-02-18"),
   },
+  {
+    id: "e6",
+    description: "A pair of shoes",
+    amount: 59.99,
+    date: new Date("2021-12-19"),
+  },
+  {
+    id: "e7",
+    description: "A PS5",
+    amount: 999.99,
+    date: new Date("2022-01-05"),
+  },
+  {
+    id: "e8",
+    description: "A dosen bananas",
+    amount: 1.99,
+    date: new Date("2021-12-01"),
+  },
+  {
+    id: "e9",
+    description: "A book",
+    amount: 9.99,
+    date: new Date("2022-02-19"),
+  },
+  {
+    id: "e10",
+    description: "Udemy Course",
+    amount: 18.99,
+    date: new Date("2022-02-18"),
+  },
 ];
 
 export const ExpensesOutput = (props: Props) => {

@@ -1,4 +1,5 @@
-import { FlatList, Text } from "react-native";
+import { FlatList } from "react-native";
+import { ExpenseItem } from "../ExpenseItem/ExpenseItem";
 
 type Props = {
   expenses: {
@@ -8,7 +9,13 @@ type Props = {
 };
 
 const render = (item: any) => {
-  return <Text>{item.description}</Text>;
+  return (
+    <ExpenseItem
+      description={item.description}
+      date={item.date}
+      amount={item.amount}
+    />
+  );
 };
 
 export const ExpensesList = (props: Props) => {
@@ -18,6 +25,8 @@ export const ExpensesList = (props: Props) => {
       data={expenses}
       renderItem={({ item }) => render(item)}
       keyExtractor={(item) => item.id}
+      showsHorizontalScrollIndicator={false}
+      showsVerticalScrollIndicator={false}
     />
   );
 };
