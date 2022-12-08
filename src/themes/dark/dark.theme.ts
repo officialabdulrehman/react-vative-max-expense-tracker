@@ -50,9 +50,9 @@ export const DarkTheme = (): ThemeI => {
     },
     textColors: {
       primary000: "#fff",
-      primary100: "f3f3f3",
-      primary200: "eee",
-      primary300: "e3e3e3",
+      primary100: "#f3f3f3",
+      primary200: "#eee",
+      primary300: "#e3e3e3",
       primary400: "#ccc",
       primary500: "#c3c3c3",
       primary600: "#bbb",

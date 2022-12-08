@@ -13,8 +13,8 @@ export const ExpensesSummary = (props: Props) => {
   }, 0);
   return (
     <View style={styles.container}>
-      <Text>{period}</Text>
-      <Text>${sum.toFixed(2)}USD</Text>
+      <Text style={styles.period}>{period}</Text>
+      <Text style={styles.sum}>${sum.toFixed(2)}/- USD</Text>
     </View>
   );
 };

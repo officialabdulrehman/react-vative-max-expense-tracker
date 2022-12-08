@@ -1,6 +1,7 @@
 import { View } from "react-native";
 import { ExpensesList } from "../ExpensesList/ExpensesList";
 import { ExpensesSummary } from "../ExpensesSummary/ExpensesSummary";
+import { styles } from "./ExpensesOutput.styles";
 
 type Props = {
   expenses: unknown;
@@ -43,7 +44,7 @@ const DUMMY_EXPENSES = [
 export const ExpensesOutput = (props: Props) => {
   const { expenses, period } = props;
   return (
-    <View>
+    <View style={styles.container}>
       <ExpensesSummary period={period} expenses={DUMMY_EXPENSES} />
       <ExpensesList expenses={DUMMY_EXPENSES} />
     </View>
