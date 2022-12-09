@@ -3,6 +3,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useLayoutEffect } from "react";
 import { View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
+import { ExpenseForm } from "../../components/ExpenseForm/ExpenseForm";
 import { Button } from "../../components/UI/Button/Button";
 import { ButtonMode } from "../../components/UI/Button/ButtonMode.enum";
 import { IconButton } from "../../components/UI/IconButton/IconButton";
@@ -78,6 +79,7 @@ export const ExpenseManage = (props: Props) => {
 
   return (
     <View style={styles.container}>
+      <ExpenseForm />
       <View style={styles.buttonsContainer}>
         <Button
           style={styles.button}
