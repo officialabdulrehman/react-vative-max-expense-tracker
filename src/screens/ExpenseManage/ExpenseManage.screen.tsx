@@ -52,8 +52,9 @@ export const ExpenseManage = (props: Props) => {
           ...data,
         })
       );
+    } else {
+      dispatch(addExpense(data));
     }
-    dispatch(addExpense(data));
     navigation.goBack();
   };
 
