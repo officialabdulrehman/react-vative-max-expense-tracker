@@ -8,5 +8,11 @@ export const ExpensesAll = (props: Props) => {
   const expenses = useSelector(
     (state: RootState) => state.expenseReducer.expenses
   );
-  return <ExpensesOutput expenses={expenses} period="All Time" />;
+  return (
+    <ExpensesOutput
+      expenses={expenses}
+      period="All Time"
+      fallbacktext="No expenses found"
+    />
+  );
 };

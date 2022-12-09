@@ -10,5 +10,11 @@ export const ExpensesRecent = (props: Props) => {
   const expenses = useSelector(
     (state: RootState) => state.expenseReducer.expenses
   ).filter((expense: Expense) => new Date(expense.date) > getDateMinusDays(7));
-  return <ExpensesOutput expenses={expenses} period="Last 7 Days" />;
+  return (
+    <ExpensesOutput
+      expenses={expenses}
+      period="Last 7 Days"
+      fallbacktext="No expenses registered for the last 7 days"
+    />
+  );
 };

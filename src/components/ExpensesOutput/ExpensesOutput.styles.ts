@@ -6,5 +6,11 @@ export const styles = DynamicStyleSheet.create((props) => ({
     paddingHorizontal: 24,
     paddingTop: 24,
     backgroundColor: props.backgroundColors.primary100
+  },
+  fallbackText: {
+    color: props.colors.primary400,
+    fontSize: 16,
+    textAlign: "center",
+    marginTop: 40
   }
 }))
