@@ -65,7 +65,7 @@ const initialState: State = {
       id: "e10",
       description: "Udemy Course",
       amount: 18.99,
-      date: new Date("2022-02-18").toString(),
+      date: new Date("2022-12-06").toString(),
     },
   ]
 }
