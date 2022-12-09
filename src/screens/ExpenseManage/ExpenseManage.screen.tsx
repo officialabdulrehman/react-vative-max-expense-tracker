@@ -4,9 +4,8 @@ import { useLayoutEffect } from "react";
 import { View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { ExpenseForm } from "../../components/ExpenseForm/ExpenseForm";
-import { Button } from "../../components/UI/Button/Button";
-import { ButtonMode } from "../../components/UI/Button/ButtonMode.enum";
 import { IconButton } from "../../components/UI/IconButton/IconButton";
+import { AddExpense } from "../../store/redux/slices/expense/Expense.model";
 import {
   addExpense,
   removeExpense,
@@ -45,24 +44,16 @@ export const ExpenseManage = (props: Props) => {
     });
   }, [navigation, id]);
 
-  const handleConfirm = () => {
+  const handleConfirm = (data: AddExpense) => {
     if (id) {
       dispatch(
         updateExpense({
           id,
-          description: "Updated Description",
-          amount: 342.99,
-          date: new Date().toISOString(),
+          ...data,
         })
       );
     }
-    dispatch(
-      addExpense({
-        description: "Added new Description",
-        amount: 342.99,
-        date: new Date().toISOString(),
-      })
-    );
+    dispatch(addExpense(data));
     navigation.goBack();
   };
 
@@ -80,19 +71,7 @@ export const ExpenseManage = (props: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
-        <ExpenseForm />
-        <View style={styles.buttonsContainer}>
-          <Button
-            style={styles.button}
-            mode={ButtonMode.FLAT}
-            onPress={handleCancel}
-          >
-            Cancel
-          </Button>
-          <Button style={styles.button} onPress={handleConfirm}>
-            {id ? "Update" : "Add"}
-          </Button>
-        </View>
+        <ExpenseForm onCancel={handleCancel} onSubmit={handleConfirm} />
         {id && (
           <View style={styles.deleteIconContainer}>
             <IconButton

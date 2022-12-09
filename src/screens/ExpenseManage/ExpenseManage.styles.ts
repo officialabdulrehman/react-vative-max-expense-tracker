@@ -15,15 +15,6 @@ export const styles = DynamicStyleSheet.create((props) => ({
     paddingHorizontal: 5,
     paddingBottom: 20
   },
-  buttonsContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  button: {
-    marginHorizontal: 6,
-    minWidth: 90
-  },
   deleteIconContainer: {
     marginTop: 16,
     paddingTop: 10,
