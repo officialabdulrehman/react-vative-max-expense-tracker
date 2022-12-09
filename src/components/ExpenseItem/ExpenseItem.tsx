@@ -5,22 +5,25 @@ import { Screens } from "../../screens/Screens.enum";
 import { styles } from "./ExpenseItem.styles";
 
 type Props = {
+  id: string;
   description: string;
   date: Date;
   amount: number;
 };
 
 type NavigationProps = {
-  ExpenseManage: {};
+  ExpenseManage: {
+    id: string;
+  };
 };
 
 export const ExpenseItem = (props: Props) => {
-  const { description, date, amount } = props;
+  const { id, description, date, amount } = props;
   const navigation =
     useNavigation<NativeStackNavigationProp<NavigationProps>>();
 
   const onPress = () => {
-    navigation.navigate(Screens.ExpenseManage, {});
+    navigation.navigate(Screens.ExpenseManage, { id });
   };
 
   return (

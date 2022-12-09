@@ -11,6 +11,7 @@ type Props = {
 const render = (item: any) => {
   return (
     <ExpenseItem
+      id={item.id}
       description={item.description}
       date={item.date}
       amount={item.amount}

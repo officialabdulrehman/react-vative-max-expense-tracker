@@ -28,7 +28,7 @@ export const MainBottomTabNavigator = () => {
             size={26}
             color={theme.colors.primary400}
             onPress={() => {
-              // navigation.navigate(Screens.ExpenseManage, {});
+              navigation.navigate(Screens.ExpenseManage, {});
             }}
           />
         ),

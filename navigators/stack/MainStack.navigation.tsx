@@ -1,6 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useSelector } from "react-redux";
-import { IconButton } from "../../src/components/UI/IconButton/IconButton";
 import { ExpenseManage } from "../../src/screens/ExpenseManage/ExpenseManage.screen";
 import { Screens } from "../../src/screens/Screens.enum";
 import { RootState } from "../../src/store/redux/store";
@@ -21,14 +20,6 @@ export const MainStackNavigator = () => {
           backgroundColor: theme.backgroundColors.primary000,
         },
         tabBarActiveTintColor: theme.colors.primary400,
-        headerRight: () => (
-          <IconButton
-            name="add"
-            size={26}
-            color={theme.colors.primary400}
-            onPress={() => {}}
-          />
-        ),
       })}
     >
       <Stack.Screen
@@ -38,7 +29,13 @@ export const MainStackNavigator = () => {
           headerShown: false,
         }}
       />
-      <Stack.Screen name={Screens.ExpenseManage} component={ExpenseManage} />
+      <Stack.Screen
+        name={Screens.ExpenseManage}
+        component={ExpenseManage}
+        options={{
+          presentation: "modal",
+        }}
+      />
     </Stack.Navigator>
   );
 };
