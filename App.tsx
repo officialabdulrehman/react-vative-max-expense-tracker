@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 import { Provider, useSelector } from "react-redux";
+import { IconButton } from "./src/components/UI/IconButton/IconButton";
 import { ExpenseManage } from "./src/screens/ExpenseManage/ExpenseManage.screen";
 import { ExpensesAll } from "./src/screens/ExpensesAll/ExpensesAll.screen";
 import { ExpensesRecent } from "./src/screens/ExpensesRecent/ExpensesRecent.screen";
@@ -17,7 +18,7 @@ const NavigationBottomTabs = () => {
   const theme = useSelector((state: RootState) => state.themeReducer.theme);
   return (
     <BottomTabs.Navigator
-      screenOptions={{
+      screenOptions={({ navigation, route }) => ({
         headerStyle: {
           backgroundColor: theme.backgroundColors.primary000,
         },
@@ -26,7 +27,17 @@ const NavigationBottomTabs = () => {
           backgroundColor: theme.backgroundColors.primary000,
         },
         tabBarActiveTintColor: theme.colors.primary400,
-      }}
+        headerRight: () => (
+          <IconButton
+            name="add"
+            size={26}
+            color={theme.colors.primary400}
+            onPress={() => {
+              // navigation.navigate(Screens.ExpenseManage, {});
+            }}
+          />
+        ),
+      })}
     >
       <BottomTabs.Screen
         name={Screens.ExpensesRecent}

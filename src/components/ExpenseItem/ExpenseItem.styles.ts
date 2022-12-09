@@ -9,6 +9,9 @@ export const styles = DynamicStyleSheet.create((props) => ({
     justifyContent: "space-between",
     borderRadius: 10,
   },
+  pressed: {
+    opacity: 0.75
+  },
   textBase: {
     color: props.colors.primary400,
   },
@@ -27,7 +30,7 @@ export const styles = DynamicStyleSheet.create((props) => ({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
-    width: "25%"
+    width: "26%"
   },
   amount: {
     color: props.colors.primary200,
