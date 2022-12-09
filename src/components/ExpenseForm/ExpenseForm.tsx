@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View } from "react-native";
+import { Alert, View } from "react-native";
 import { useSelector } from "react-redux";
 import {
   AddExpense,
@@ -41,12 +41,26 @@ export const ExpenseForm = (props: Props) => {
   };
 
   const handleConfirm = () => {
+    if (!validations()) {
+      Alert.alert("Invalid input", "Please check your input");
+      return;
+    }
     const data: AddExpense = {
       amount: +amount,
       date: new Date(date).toISOString(),
       description: description,
     };
     onSubmit(data);
+  };
+
+  const validations = (): boolean => {
+    const isAmountValid = !isNaN(+amount) && +amount > 0;
+    const isDateValid = date.toString() !== "Invalid Date";
+    const isDescriptionValid = description.trim().length;
+    if (!isAmountValid || !isDateValid || isDescriptionValid) {
+      return false;
+    }
+    return true;
   };
 
   return (
