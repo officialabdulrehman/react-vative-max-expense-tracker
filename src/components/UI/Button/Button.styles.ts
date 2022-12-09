@@ -4,7 +4,7 @@ export const styles = DynamicStyleSheet.create((props) => ({
   container: {
     borderRadius: 10,
     padding: 10,
-    backgroundColor: props.backgroundColors.primary100,
+    backgroundColor: props.backgroundColors.primary000,
     alignItems: "center"
   },
   flat: {
@@ -17,6 +17,11 @@ export const styles = DynamicStyleSheet.create((props) => ({
     color: props.colors.primary200
   },
   pressed: {
+    opacity: 0.75,
+    borderRadius: 6,
+    backgroundColor: props.backgroundColors.primary000,
+  },
+  pressedDark: {
     opacity: 0.75,
     borderRadius: 6,
     backgroundColor: props.backgroundColors.primary100,

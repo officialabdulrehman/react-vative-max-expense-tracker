@@ -79,29 +79,31 @@ export const ExpenseManage = (props: Props) => {
 
   return (
     <View style={styles.container}>
-      <ExpenseForm />
-      <View style={styles.buttonsContainer}>
-        <Button
-          style={styles.button}
-          mode={ButtonMode.FLAT}
-          onPress={handleCancel}
-        >
-          Cancel
-        </Button>
-        <Button style={styles.button} onPress={handleConfirm}>
-          {id ? "Update" : "Add"}
-        </Button>
-      </View>
-      {id && (
-        <View style={styles.deleteIconContainer}>
-          <IconButton
-            name="trash"
-            color={theme.colors.secondary400}
-            size={30}
-            onPress={handleDelete}
-          />
+      <View style={styles.contentContainer}>
+        <ExpenseForm />
+        <View style={styles.buttonsContainer}>
+          <Button
+            style={styles.button}
+            mode={ButtonMode.FLAT}
+            onPress={handleCancel}
+          >
+            Cancel
+          </Button>
+          <Button style={styles.button} onPress={handleConfirm}>
+            {id ? "Update" : "Add"}
+          </Button>
         </View>
-      )}
+        {id && (
+          <View style={styles.deleteIconContainer}>
+            <IconButton
+              name="trash"
+              color={theme.colors.secondary400}
+              size={30}
+              onPress={handleDelete}
+            />
+          </View>
+        )}
+      </View>
     </View>
   );
 };

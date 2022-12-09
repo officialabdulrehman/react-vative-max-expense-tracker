@@ -13,7 +13,7 @@ export const styles = DynamicStyleSheet.create((props) => ({
   },
   textInput: {
     color: props.textColors.primary400,
-    backgroundColor: props.backgroundColors.primary100,
+    backgroundColor: props.backgroundColors.primary000,
     borderRadius: 8,
     paddingVertical: 6,
     paddingHorizontal: 10,

@@ -8,6 +8,13 @@ export const styles = DynamicStyleSheet.create((props) => ({
     // justifyContent: 'center',
     padding: 24
   },
+  contentContainer: {
+    backgroundColor: props.backgroundColors.primary100,
+    borderRadius: 10,
+    paddingTop: 5,
+    paddingHorizontal: 5,
+    paddingBottom: 20
+  },
   buttonsContainer: {
     flexDirection: "row",
     justifyContent: "center",

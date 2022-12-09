@@ -15,7 +15,10 @@ export const Button = (props: Props) => {
     <View style={style}>
       <Pressable
         onPress={onPress}
-        style={({ pressed }) => pressed && styles.pressed}
+        style={({ pressed }) =>
+          pressed &&
+          (mode === ButtonMode.FLAT ? styles.pressed : styles.pressedDark)
+        }
       >
         <View
           style={[styles.container, mode === ButtonMode.FLAT && styles.flat]}
