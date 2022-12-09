@@ -7,11 +7,10 @@ type Props = {
   onPress: () => void;
   mode?: ButtonMode;
   style?: StyleProp<ViewStyle>;
-  textColor?: string;
 };
 
 export const Button = (props: Props) => {
-  const { children, onPress, mode, style, textColor } = props;
+  const { children, onPress, mode, style } = props;
   return (
     <View style={style}>
       <Pressable
@@ -22,11 +21,7 @@ export const Button = (props: Props) => {
           style={[styles.container, mode === ButtonMode.FLAT && styles.flat]}
         >
           <Text
-            style={[
-              styles.text,
-              mode === ButtonMode.FLAT && styles.flatText,
-              { color: textColor },
-            ]}
+            style={[styles.text, mode === ButtonMode.FLAT && styles.flatText]}
           >
             {children}
           </Text>

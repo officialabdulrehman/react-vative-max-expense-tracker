@@ -39,8 +39,17 @@ export const ExpenseManage = (props: Props) => {
     });
   }, [navigation, id]);
 
-  const handleDelete = () => {};
-  const handleCancel = () => {};
+  const handleConfirm = () => {
+    navigation.goBack();
+  };
+
+  const handleCancel = () => {
+    navigation.goBack();
+  };
+
+  const handleDelete = () => {
+    navigation.goBack();
+  };
 
   return (
     <View style={styles.container}>
@@ -52,7 +61,7 @@ export const ExpenseManage = (props: Props) => {
         >
           Cancel
         </Button>
-        <Button style={styles.button} onPress={handleCancel}>
+        <Button style={styles.button} onPress={handleConfirm}>
           {id ? "Update" : "Add"}
         </Button>
       </View>
