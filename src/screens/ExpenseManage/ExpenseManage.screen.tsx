@@ -2,10 +2,15 @@ import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useLayoutEffect } from "react";
 import { View } from "react-native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Button } from "../../components/UI/Button/Button";
 import { ButtonMode } from "../../components/UI/Button/ButtonMode.enum";
 import { IconButton } from "../../components/UI/IconButton/IconButton";
+import {
+  addExpense,
+  removeExpense,
+  updateExpense,
+} from "../../store/redux/slices/expense/expense.slice";
 import { RootState } from "../../store/redux/store";
 import { Screens } from "../Screens.enum";
 import { styles } from "./ExpenseManage.styles";
@@ -30,7 +35,7 @@ export const ExpenseManage = (props: Props) => {
   const route = useRoute<RouteProp<RouteParams, NavigatedFromSreens>>();
   const navigation =
     useNavigation<NativeStackNavigationProp<NavigationProps>>();
-
+  const dispatch = useDispatch();
   const { id } = route.params;
 
   useLayoutEffect(() => {
@@ -40,6 +45,23 @@ export const ExpenseManage = (props: Props) => {
   }, [navigation, id]);
 
   const handleConfirm = () => {
+    if (id) {
+      dispatch(
+        updateExpense({
+          id,
+          description: "Updated Description",
+          amount: 342.99,
+          date: new Date().toISOString(),
+        })
+      );
+    }
+    dispatch(
+      addExpense({
+        description: "Added new Description",
+        amount: 342.99,
+        date: new Date().toISOString(),
+      })
+    );
     navigation.goBack();
   };
 
@@ -48,6 +70,9 @@ export const ExpenseManage = (props: Props) => {
   };
 
   const handleDelete = () => {
+    if (id) {
+      dispatch(removeExpense({ id }));
+    }
     navigation.goBack();
   };
 

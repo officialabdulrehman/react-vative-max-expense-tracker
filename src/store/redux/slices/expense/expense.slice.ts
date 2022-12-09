@@ -84,7 +84,7 @@ export const expenseSlice = createSlice({
       state.expenses.push(expense)
     },
     removeExpense: (state, { payload: { id } }: PayloadAction<RemoveExpense>) => {
-      state.expenses.filter((expense: Expense) => expense.id !== id)
+      state.expenses = state.expenses.filter((expense: Expense) => expense.id !== id)
     },
     updateExpense: (state, { payload: { id, amount, date, description } }: PayloadAction<UpdateExpense>) => {
       const index = state.expenses.findIndex((expense: Expense) => expense.id === id)
