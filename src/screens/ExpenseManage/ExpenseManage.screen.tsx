@@ -71,7 +71,7 @@ export const ExpenseManage = (props: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
-        <ExpenseForm onCancel={handleCancel} onSubmit={handleConfirm} />
+        <ExpenseForm id={id} onCancel={handleCancel} onSubmit={handleConfirm} />
         {id && (
           <View style={styles.deleteIconContainer}>
             <IconButton

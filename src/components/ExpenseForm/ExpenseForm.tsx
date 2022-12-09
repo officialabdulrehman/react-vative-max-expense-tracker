@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { View } from "react-native";
-import { AddExpense } from "../../store/redux/slices/expense/Expense.model";
+import { useSelector } from "react-redux";
+import {
+  AddExpense,
+  Expense,
+} from "../../store/redux/slices/expense/Expense.model";
+import { RootState } from "../../store/redux/store";
 import { Button } from "../UI/Button/Button";
 import { ButtonMode } from "../UI/Button/ButtonMode.enum";
 import { Input } from "../UI/Input/Input";
@@ -14,9 +19,16 @@ type Props = {
 
 export const ExpenseForm = (props: Props) => {
   const { id, onCancel, onSubmit } = props;
-  const [amount, setAmount] = useState<string>("");
-  const [date, setDate] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
+  const expense = useSelector(
+    (state: RootState) => state.expenseReducer.expenses
+  ).find((expense: Expense) => expense.id === id);
+  const [amount, setAmount] = useState<string>(
+    expense?.amount.toString() || ""
+  );
+  const [date, setDate] = useState<string>(expense?.date || "");
+  const [description, setDescription] = useState<string>(
+    expense?.description || ""
+  );
 
   const handleAmountChange = (text: string) => {
     setAmount(text);
