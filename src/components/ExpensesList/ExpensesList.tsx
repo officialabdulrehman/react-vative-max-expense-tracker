@@ -1,11 +1,9 @@
 import { FlatList } from "react-native";
+import { Expense } from "../../store/redux/slices/expense/Expense.model";
 import { ExpenseItem } from "../ExpenseItem/ExpenseItem";
 
 type Props = {
-  expenses: {
-    id: string;
-    amount: number;
-  }[];
+  expenses: Expense[];
 };
 
 const render = (item: any) => {

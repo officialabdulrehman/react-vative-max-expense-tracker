@@ -1,8 +1,9 @@
 import { Text, View } from "react-native";
+import { Expense } from "../../store/redux/slices/expense/Expense.model";
 import { styles } from "./ExpensesSummary.styles.";
 
 type Props = {
-  expenses: { amount: number }[];
+  expenses: Expense[];
   period: string;
 };
 

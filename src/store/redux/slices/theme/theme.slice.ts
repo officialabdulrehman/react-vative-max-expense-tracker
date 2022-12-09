@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { getTheme } from "../../../themes/theme"
-import { ThemeI } from "../../../themes/themeI"
-import { Themes } from "../../../themes/Themes.enum"
+import { getTheme } from "../../../../themes/theme"
+import { ThemeI } from "../../../../themes/themeI"
+import { Themes } from "../../../../themes/Themes.enum"
 
 type State = {
   theme: ThemeI
