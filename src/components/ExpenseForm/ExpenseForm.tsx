@@ -10,6 +10,7 @@ export const ExpenseForm = (props: Props) => {
   const handleDescriptionChange = () => {};
   return (
     <View style={styles.container}>
+      {/* <Text style={styles.title}>Expense form</Text> */}
       <Input
         label="Amount"
         config={{
