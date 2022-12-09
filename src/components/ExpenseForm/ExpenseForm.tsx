@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Alert, View } from "react-native";
+import { Text, View } from "react-native";
 import { useSelector } from "react-redux";
 import {
   AddExpense,
@@ -17,85 +17,112 @@ type Props = {
   onSubmit: (data: AddExpense) => void;
 };
 
+type State = {
+  value: string;
+  isValid: boolean;
+};
+
 export const ExpenseForm = (props: Props) => {
   const { id, onCancel, onSubmit } = props;
   const expense = useSelector(
     (state: RootState) => state.expenseReducer.expenses
   ).find((expense: Expense) => expense.id === id);
-  const [amount, setAmount] = useState<string>(
-    expense?.amount.toString() || ""
-  );
-  const [date, setDate] = useState<string>(expense?.date || "");
-  const [description, setDescription] = useState<string>(
-    expense?.description || ""
-  );
+  const [amount, setAmount] = useState<State>({
+    value: expense?.amount.toString() || "",
+    isValid: true,
+  });
+  const [date, setDate] = useState<State>({
+    value: expense?.date || "",
+    isValid: true,
+  });
+  const [description, setDescription] = useState<State>({
+    value: expense?.description || "",
+    isValid: true,
+  });
 
   const handleAmountChange = (text: string) => {
-    setAmount(text);
+    setAmount({ value: text, isValid: true });
   };
   const handleDateChange = (text: string) => {
-    setDate(text);
+    setDate({ value: text, isValid: true });
   };
   const handleDescriptionChange = (text: string) => {
-    setDescription(text);
+    setDescription({ value: text, isValid: true });
   };
 
   const handleConfirm = () => {
     if (!validations()) {
-      Alert.alert("Invalid input", "Please check your input");
       return;
     }
     const data: AddExpense = {
       amount: +amount,
-      date: new Date(date).toISOString(),
-      description: description,
+      date: new Date(date.value).toISOString(),
+      description: description.value,
     };
     onSubmit(data);
   };
 
   const validations = (): boolean => {
-    const isAmountValid = !isNaN(+amount) && +amount > 0;
-    const isDateValid = date.toString() !== "Invalid Date";
-    const isDescriptionValid = description.trim().length;
+    const isAmountValid = !isNaN(+amount.value) && +amount.value > 0;
+    const isDateValid = date.value.toString() === "Invalid Date" ? true : false;
+    const isDescriptionValid = description.value.trim().length ? true : false;
     if (!isAmountValid || !isDateValid || isDescriptionValid) {
+      setAmount({
+        value: amount.value,
+        isValid: isAmountValid,
+      });
+      setDate({
+        value: amount.value,
+        isValid: isDateValid,
+      });
+      setDescription({
+        value: amount.value,
+        isValid: isDescriptionValid,
+      });
       return false;
     }
     return true;
   };
 
+  const isFormValid = amount.isValid && date.isValid && description.isValid;
+  console.log("date valid => ", date.isValid);
   return (
     <View style={styles.container}>
       {/* <Text style={styles.title}>Expense form</Text> */}
       <Input
         label="Amount"
         config={{
-          value: amount,
+          value: amount.value,
           keyboardType: "decimal-pad",
           onChangeText: handleAmountChange,
           placeholder: "Enter the amound. eg: 99.99",
         }}
+        invalid={!amount.isValid}
       />
       <Input
         label="Date"
         config={{
-          value: date,
+          value: date.value,
           keyboardType: "decimal-pad",
           onChangeText: handleDateChange,
           placeholder: "YYYY-MM-DD",
           maxLength: 10,
         }}
+        invalid={!date.isValid}
       />
       <Input
         label="Description"
         config={{
-          value: description,
+          value: description.value,
           onChangeText: handleDescriptionChange,
           multiline: true,
           placeholder: "Enter your details",
           autoCapitalize: "sentences",
           autoCorrect: false,
         }}
+        invalid={!description.isValid}
       />
+      {!isFormValid && <Text style={styles.errorMsg}>Invalid input</Text>}
       <View style={styles.buttonsContainer}>
         <Button style={styles.button} mode={ButtonMode.FLAT} onPress={onCancel}>
           Cancel

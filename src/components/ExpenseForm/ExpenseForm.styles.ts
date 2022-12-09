@@ -12,6 +12,11 @@ export const styles = DynamicStyleSheet.create((props) => ({
     paddingTop: 10,
     paddingBottom: 10
   },
+  errorMsg: {
+    marginVertical: 8,
+    marginHorizontal: 12,
+    color: props.colors.secondary400,
+  },
   buttonsContainer: {
     flexDirection: "row",
     justifyContent: "center",

@@ -23,4 +23,11 @@ export const styles = DynamicStyleSheet.create((props) => ({
     minHeight: 100,
     textAlignVertical: "top"
   },
+  invalidLabel: {
+    color: props.colors.secondary400,
+  },
+  invalidInput: {
+    // backgroundColor: props.backgroundColors.primary400,
+    backgroundColor: "rgba(244, 67, 54, 0.1)",
+  }
 }))
