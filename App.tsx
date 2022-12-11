@@ -1,7 +1,10 @@
 import { StatusBar } from "expo-status-bar";
 import { Provider } from "react-redux";
-import { RootNavigator } from "./navigators/Root.navigation";
+import { RootNavigator } from "./src/navigators/Root.navigation";
 import { store } from "./src/store/redux/store";
+
+// import { SERVER_URL } from "react-native-dotenv";
+// console.log("SERVER_URL => ", SERVER_URL);
 
 export default function App() {
   return (

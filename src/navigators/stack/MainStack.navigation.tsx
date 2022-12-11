@@ -1,8 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useSelector } from "react-redux";
-import { ExpenseManage } from "../../src/screens/ExpenseManage/ExpenseManage.screen";
-import { Screens } from "../../src/screens/Screens.enum";
-import { RootState } from "../../src/store/redux/store";
+import { ExpenseManage } from "../../../src/screens/ExpenseManage/ExpenseManage.screen";
+import { Screens } from "../../../src/screens/Screens.enum";
+import { RootState } from "../../../src/store/redux/store";
 import { MainBottomTabNavigator } from "../bottomTabs/MainBottomTab.navigation";
 
 const Stack = createNativeStackNavigator();

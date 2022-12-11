@@ -85,7 +85,6 @@ export const ExpenseForm = (props: Props) => {
   };
 
   const isFormValid = amount.isValid && date.isValid && description.isValid;
-  console.log("date valid => ", date.isValid);
   return (
     <View style={styles.container}>
       {/* <Text style={styles.title}>Expense form</Text> */}

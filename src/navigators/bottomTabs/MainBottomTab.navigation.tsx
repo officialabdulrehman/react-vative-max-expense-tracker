@@ -1,11 +1,11 @@
 import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useSelector } from "react-redux";
-import { IconButton } from "../../src/components/UI/IconButton/IconButton";
-import { ExpensesAll } from "../../src/screens/ExpensesAll/ExpensesAll.screen";
-import { ExpensesRecent } from "../../src/screens/ExpensesRecent/ExpensesRecent.screen";
-import { Screens } from "../../src/screens/Screens.enum";
-import { RootState } from "../../src/store/redux/store";
+import { IconButton } from "../../../src/components/UI/IconButton/IconButton";
+import { ExpensesAll } from "../../../src/screens/ExpensesAll/ExpensesAll.screen";
+import { ExpensesRecent } from "../../../src/screens/ExpensesRecent/ExpensesRecent.screen";
+import { Screens } from "../../../src/screens/Screens.enum";
+import { RootState } from "../../../src/store/redux/store";
 
 const BottomTabs = createBottomTabNavigator();
 
