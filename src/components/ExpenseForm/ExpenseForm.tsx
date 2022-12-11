@@ -55,7 +55,7 @@ export const ExpenseForm = (props: Props) => {
       return;
     }
     const data: AddExpense = {
-      amount: +amount,
+      amount: parseInt(amount.value),
       date: new Date(date.value).toISOString(),
       description: description.value,
     };
@@ -64,19 +64,20 @@ export const ExpenseForm = (props: Props) => {
 
   const validations = (): boolean => {
     const isAmountValid = !isNaN(+amount.value) && +amount.value > 0;
-    const isDateValid = date.value.toString() === "Invalid Date" ? true : false;
+    const isDateValid = date.value.toString() !== "Invalid Date" ? true : false;
     const isDescriptionValid = description.value.trim().length ? true : false;
-    if (!isAmountValid || !isDateValid || isDescriptionValid) {
+
+    if (!isAmountValid || !isDateValid || !isDescriptionValid) {
       setAmount({
         value: amount.value,
         isValid: isAmountValid,
       });
       setDate({
-        value: amount.value,
+        value: date.value,
         isValid: isDateValid,
       });
       setDescription({
-        value: amount.value,
+        value: description.value,
         isValid: isDescriptionValid,
       });
       return false;

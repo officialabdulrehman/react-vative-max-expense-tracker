@@ -5,6 +5,7 @@ import { View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { ExpenseForm } from "../../components/ExpenseForm/ExpenseForm";
 import { IconButton } from "../../components/UI/IconButton/IconButton";
+import { expenseApi } from "../../services/api/expense/expense.api";
 import { AddExpense } from "../../store/redux/slices/expense/Expense.model";
 import {
   addExpense,
@@ -53,6 +54,7 @@ export const ExpenseManage = (props: Props) => {
         })
       );
     } else {
+      expenseApi.create(data);
       dispatch(addExpense(data));
     }
     navigation.goBack();
