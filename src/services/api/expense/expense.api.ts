@@ -4,9 +4,9 @@ import { Expense } from "../../../store/redux/slices/expense/Expense.model"
 
 class ExpenseApi {
 
-  public create(data: any) {
-    const result = api.post(`${SERVER_URL}/expenses.json`, data, {})
-    return result
+  public async create(data: any) {
+    const { data: result } = await api.post(`${SERVER_URL}/expenses.json`, data, {})
+    return result.id
   }
 
   public async list(data?: any) {
@@ -26,6 +26,17 @@ class ExpenseApi {
     }
     return result
   }
+
+  public update(id: string, data: any) {
+    const promise = api.put(`${SERVER_URL}/expenses/${id}.json`, data, {})
+    return promise
+  }
+
+  public delete(id: string) {
+    const promise = api.delete(`${SERVER_URL}/expenses/${id}.json`, {})
+    return promise
+  }
+
 }
 
 export const expenseApi = new ExpenseApi()

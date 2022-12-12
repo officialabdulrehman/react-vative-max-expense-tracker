@@ -6,6 +6,7 @@ export type Expense = {
 }
 
 export type AddExpense = {
+  id: string,
   description: string,
   amount: number
   date: string

@@ -45,17 +45,18 @@ export const ExpenseManage = (props: Props) => {
     });
   }, [navigation, id]);
 
-  const handleConfirm = (data: AddExpense) => {
+  const handleConfirm = async (data: AddExpense) => {
     if (id) {
       dispatch(
         updateExpense({
-          id,
           ...data,
+          id,
         })
       );
+      await expenseApi.update(id, data);
     } else {
-      expenseApi.create(data);
-      dispatch(addExpense(data));
+      const id = await expenseApi.create(data);
+      dispatch(addExpense({ ...data, id }));
     }
     navigation.goBack();
   };
@@ -64,9 +65,10 @@ export const ExpenseManage = (props: Props) => {
     navigation.goBack();
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (id) {
       dispatch(removeExpense({ id }));
+      await expenseApi.delete(id);
     }
     navigation.goBack();
   };

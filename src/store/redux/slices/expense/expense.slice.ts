@@ -16,14 +16,8 @@ export const expenseSlice = createSlice({
     setExpenses: (state, { payload }: PayloadAction<Expense[]>) => {
       state.expenses = payload
     },
-    addExpense: (state, { payload: { amount, date, description } }: PayloadAction<AddExpense>) => {
-      const expense: Expense = {
-        id: new Date().toISOString() + Math.random().toString(),
-        amount,
-        date,
-        description
-      }
-      state.expenses.push(expense)
+    addExpense: (state, { payload }: PayloadAction<AddExpense>) => {
+      state.expenses.push(payload)
     },
     removeExpense: (state, { payload: { id } }: PayloadAction<RemoveExpense>) => {
       state.expenses = state.expenses.filter((expense: Expense) => expense.id !== id)
