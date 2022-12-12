@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ExpensesOutput } from "../../components/ExpensesOutput/ExpensesOutput";
+import { LoadingOverlay } from "../../components/UI/LoadingOverlay/LoadingOverlay";
 import { expenseApi } from "../../services/api/expense/expense.api";
 import { Expense } from "../../store/redux/slices/expense/Expense.model";
 import { setExpenses } from "../../store/redux/slices/expense/expense.slice";
@@ -14,6 +15,7 @@ export const ExpensesRecent = (props: Props) => {
     (state: RootState) => state.expenseReducer.expenses
   ).filter((expense: Expense) => new Date(expense.date) > getDateMinusDays(7));
   const dispatch = useDispatch();
+  const [isFetching, setIsFetching] = useState(true);
 
   const filterRecent = (data: Expense[]) => {
     return data.filter(
@@ -26,9 +28,14 @@ export const ExpensesRecent = (props: Props) => {
       const data = await expenseApi.list();
       const filteredData = filterRecent(data);
       dispatch(setExpenses(filteredData));
+      setIsFetching(false);
     };
     getExpenses();
-  }, []);
+  }, [setIsFetching]);
+
+  if (isFetching) {
+    return <LoadingOverlay />;
+  }
 
   return (
     <ExpensesOutput

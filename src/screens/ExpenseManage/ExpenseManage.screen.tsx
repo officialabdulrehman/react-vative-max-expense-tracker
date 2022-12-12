@@ -1,10 +1,11 @@
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useLayoutEffect } from "react";
+import { useLayoutEffect, useState } from "react";
 import { View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { ExpenseForm } from "../../components/ExpenseForm/ExpenseForm";
 import { IconButton } from "../../components/UI/IconButton/IconButton";
+import { LoadingOverlay } from "../../components/UI/LoadingOverlay/LoadingOverlay";
 import { expenseApi } from "../../services/api/expense/expense.api";
 import { AddExpense } from "../../store/redux/slices/expense/Expense.model";
 import {
@@ -37,6 +38,7 @@ export const ExpenseManage = (props: Props) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<NavigationProps>>();
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(false);
   const { id } = route.params;
 
   useLayoutEffect(() => {
@@ -46,6 +48,7 @@ export const ExpenseManage = (props: Props) => {
   }, [navigation, id]);
 
   const handleConfirm = async (data: AddExpense) => {
+    setIsLoading(true);
     if (id) {
       dispatch(
         updateExpense({
@@ -58,6 +61,7 @@ export const ExpenseManage = (props: Props) => {
       const id = await expenseApi.create(data);
       dispatch(addExpense({ ...data, id }));
     }
+    setIsLoading(false);
     navigation.goBack();
   };
 
@@ -66,12 +70,18 @@ export const ExpenseManage = (props: Props) => {
   };
 
   const handleDelete = async () => {
+    setIsLoading(true);
     if (id) {
       dispatch(removeExpense({ id }));
       await expenseApi.delete(id);
+      setIsLoading(false);
     }
     navigation.goBack();
   };
+
+  if (isLoading) {
+    return <LoadingOverlay />;
+  }
 
   return (
     <View style={styles.container}>
