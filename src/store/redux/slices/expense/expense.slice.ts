@@ -13,6 +13,9 @@ export const expenseSlice = createSlice({
   name: "expense",
   initialState,
   reducers: {
+    setExpenses: (state, { payload }: PayloadAction<Expense[]>) => {
+      state.expenses = payload
+    },
     addExpense: (state, { payload: { amount, date, description } }: PayloadAction<AddExpense>) => {
       const expense: Expense = {
         id: new Date().toISOString() + Math.random().toString(),
@@ -36,4 +39,4 @@ export const expenseSlice = createSlice({
 })
 
 export const expenseReducer = expenseSlice.reducer
-export const { addExpense, removeExpense, updateExpense } = expenseSlice.actions
+export const { setExpenses, addExpense, removeExpense, updateExpense, } = expenseSlice.actions
