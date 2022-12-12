@@ -4,6 +4,7 @@ import { useLayoutEffect, useState } from "react";
 import { View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { ExpenseForm } from "../../components/ExpenseForm/ExpenseForm";
+import { ErrorOverlay } from "../../components/UI/ErrorOverlay/ErrorOverlay";
 import { IconButton } from "../../components/UI/IconButton/IconButton";
 import { LoadingOverlay } from "../../components/UI/LoadingOverlay/LoadingOverlay";
 import { expenseApi } from "../../services/api/expense/expense.api";
@@ -39,6 +40,7 @@ export const ExpenseManage = (props: Props) => {
     useNavigation<NativeStackNavigationProp<NavigationProps>>();
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const { id } = route.params;
 
   useLayoutEffect(() => {
@@ -49,17 +51,25 @@ export const ExpenseManage = (props: Props) => {
 
   const handleConfirm = async (data: AddExpense) => {
     setIsLoading(true);
-    if (id) {
-      dispatch(
-        updateExpense({
-          ...data,
-          id,
-        })
-      );
-      await expenseApi.update(id, data);
-    } else {
-      const id = await expenseApi.create(data);
-      dispatch(addExpense({ ...data, id }));
+    try {
+      if (id) {
+        dispatch(
+          updateExpense({
+            ...data,
+            id,
+          })
+        );
+        await expenseApi.update(id, data);
+      } else {
+        const id = await expenseApi.create(data);
+        dispatch(addExpense({ ...data, id }));
+      }
+    } catch (e) {
+      if (id) {
+        setError("Update failed");
+      } else {
+        setError("Submission failed");
+      }
     }
     setIsLoading(false);
     navigation.goBack();
@@ -72,8 +82,12 @@ export const ExpenseManage = (props: Props) => {
   const handleDelete = async () => {
     setIsLoading(true);
     if (id) {
-      dispatch(removeExpense({ id }));
-      await expenseApi.delete(id);
+      try {
+        dispatch(removeExpense({ id }));
+        await expenseApi.delete(id);
+      } catch (e) {
+        setError("Deleting failed");
+      }
       setIsLoading(false);
     }
     navigation.goBack();
@@ -81,6 +95,17 @@ export const ExpenseManage = (props: Props) => {
 
   if (isLoading) {
     return <LoadingOverlay />;
+  }
+
+  if (error && !isLoading) {
+    return (
+      <ErrorOverlay
+        message={error}
+        onConfirm={() => {
+          setError("");
+        }}
+      />
+    );
   }
 
   return (

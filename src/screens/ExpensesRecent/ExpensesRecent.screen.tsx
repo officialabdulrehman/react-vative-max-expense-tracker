@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ExpensesOutput } from "../../components/ExpensesOutput/ExpensesOutput";
+import { ErrorOverlay } from "../../components/UI/ErrorOverlay/ErrorOverlay";
 import { LoadingOverlay } from "../../components/UI/LoadingOverlay/LoadingOverlay";
 import { expenseApi } from "../../services/api/expense/expense.api";
 import { Expense } from "../../store/redux/slices/expense/Expense.model";
@@ -16,18 +17,17 @@ export const ExpensesRecent = (props: Props) => {
   ).filter((expense: Expense) => new Date(expense.date) > getDateMinusDays(7));
   const dispatch = useDispatch();
   const [isFetching, setIsFetching] = useState(true);
-
-  const filterRecent = (data: Expense[]) => {
-    return data.filter(
-      (expense: Expense) => new Date(expense.date) > getDateMinusDays(7)
-    );
-  };
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const getExpenses = async () => {
-      const data = await expenseApi.list();
-      const filteredData = filterRecent(data);
-      dispatch(setExpenses(filteredData));
+      setIsFetching(true);
+      try {
+        const data = await expenseApi.list();
+        dispatch(setExpenses(data));
+      } catch (e) {
+        setError("Fetching data from server failed!");
+      }
       setIsFetching(false);
     };
     getExpenses();
@@ -37,9 +37,26 @@ export const ExpensesRecent = (props: Props) => {
     return <LoadingOverlay />;
   }
 
+  const filterRecent = (data: Expense[]) => {
+    return data.filter(
+      (expense: Expense) => new Date(expense.date) > getDateMinusDays(7)
+    );
+  };
+
+  if (error.length && !isFetching) {
+    return (
+      <ErrorOverlay
+        message={error}
+        onConfirm={() => {
+          setError("");
+        }}
+      />
+    );
+  }
+
   return (
     <ExpensesOutput
-      expenses={expenses}
+      expenses={filterRecent(expenses)}
       period="Last 7 Days"
       fallbacktext="No expenses registered for the last 7 days"
     />
